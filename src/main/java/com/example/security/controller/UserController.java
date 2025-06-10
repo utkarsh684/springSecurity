@@ -7,6 +7,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.security.NoSuchAlgorithmException;
+
 @RestController
 public class UserController {
 
@@ -17,5 +19,10 @@ public class UserController {
     public Users register(@RequestBody Users user){
         return service.register(user);
 
+    }
+
+    @PostMapping("/login")
+    public String login(@RequestBody Users user) throws NoSuchAlgorithmException {
+        return service.verify(user);
     }
 }

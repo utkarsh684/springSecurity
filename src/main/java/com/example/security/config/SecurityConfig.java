@@ -5,9 +5,11 @@ import org.springframework.boot.autoconfigure.security.SecurityProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.annotation.Order;
+import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.Customizer;
+import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.core.Authentication;
@@ -45,21 +47,8 @@ public class SecurityConfig {
         return provider;
     }
 
-//    @Bean
-//    public UserDetailsService userDetailService() {
-//
-//        UserDetails user1 = User
-//                .withDefaultPasswordEncoder()
-//                .username("utkarsh")
-//                .password("u@123")
-//                .roles("USER")
-//                .build();
-//        UserDetails user2 = User
-//                .withDefaultPasswordEncoder()
-//                .username("harsh")
-//                .password("h@123")
-//                .roles("ADMIN")
-//                .build();
-//        return new InMemoryUserDetailsManager(user1, user2);
-//    }
+    @Bean
+    public AuthenticationManager authenticationManager(AuthenticationConfiguration config) throws Exception {
+        return config.getAuthenticationManager();
+    }
 }
